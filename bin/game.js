@@ -60,7 +60,7 @@ function flap() {
     if (gameOver) {
         resetGame();
     } else if (!paused) {
-        velocityY = -9;
+        velocityY = -12;
     }
 }
 
