@@ -2,6 +2,7 @@ const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
 const width = canvas.width;
 const height = canvas.height;
+const pauseBtn = document.getElementById("pauseBtn");
 
 const images = {
     background: loadImage("flappybirdbg.png"),
@@ -66,6 +67,7 @@ function flap() {
 function togglePause() {
     if (!gameOver) {
         paused = !paused;
+        pauseBtn.textContent = paused ? "Resume" : "Pause";
     }
 }
 
@@ -142,6 +144,8 @@ canvas.addEventListener("pointerdown", () => {
         flap();
     }
 });
+
+pauseBtn.addEventListener("click", togglePause);
 
 document.addEventListener("keydown", (event) => {
     if (event.code === "Space") {

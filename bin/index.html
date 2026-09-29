@@ -9,8 +9,11 @@
 <body>
     <main>
         <h1>Flappy Bird</h1>
-        <canvas id="game" width="360" height="640" aria-label="Flappy Bird game"></canvas>
-        <p class="help">Tap or press Space to flap. Press P to pause.</p>
+        <div class="game-container">
+            <button id="pauseBtn" class="pause-btn">Pause</button>
+            <canvas id="game" width="360" height="640" aria-label="Flappy Bird game"></canvas>
+        </div>
+        <p class="help">Tap to flap. Click Pause button or press P to pause.</p>
     </main>
     <script src="game.js"></script>
 </body>
