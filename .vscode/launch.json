@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Flappy Bird",
+            "request": "launch",
+            "mainClass": "App",
+            "cwd": "${workspaceFolder}",
+            "classPaths": [
+                "${workspaceFolder}/bin",
+                "${workspaceFolder}"
+            ]
+        }
+    ]
+}

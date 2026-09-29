@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: #202124;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+main {
+    text-align: center;
+}
+
+h1 {
+    margin: 0 0 12px;
+    font-size: 28px;
+}
+
+canvas {
+    display: block;
+    width: min(360px, 94vw);
+    height: auto;
+    border: 2px solid white;
+    touch-action: none;
+}
+
+.help {
+    margin: 10px 0 0;
+    font-size: 14px;
+}
