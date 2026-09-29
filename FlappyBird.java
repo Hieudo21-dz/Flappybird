@@ -65,6 +65,7 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
     Timer placePipeTimer;
     boolean gameOver = false;
     boolean paused = false;
+    boolean gameStarted = false;
     double score = 0;
     int highScore = 0;
 
@@ -162,7 +163,13 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
         g.setFont(new Font("Arial", Font.PLAIN, 18));
         g.drawString("Best: " + highScore, 10, 58);
 
-        if (paused) {
+        if (!gameStarted) {
+            g.setColor(new Color(0, 0, 0, 100));
+            g.fillRect(0, 0, boardWidth, boardHeight);
+            g.setColor(Color.white);
+            g.setFont(new Font("Arial", Font.BOLD, 32));
+            g.drawString("Tap to start", 105, 300);
+        } else if (paused) {
             g.setColor(new Color(0, 0, 0, 150));
             g.fillRect(0, 0, boardWidth, boardHeight);
             g.setColor(Color.white);
@@ -171,10 +178,11 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
             g.setFont(new Font("Arial", Font.PLAIN, 18));
             g.drawString("Press P to resume", 105, 320);
         }
-        
 	}
 
     public void move() {
+        if (!gameStarted) return;
+
         //bird
         velocityY += gravity;
         bird.y += velocityY;
@@ -243,10 +251,15 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
                 gameOver = false;
                 score = 0;
                 paused = false;
+                gameStarted = false;
                 gameLoop.start();
                 placePipeTimer.start();
             }
             else if (!paused) {
+                if (!gameStarted) {
+                    gameStarted = true;
+                    placePipeTimer.start();
+                }
                 velocityY = -12;
             }
         }

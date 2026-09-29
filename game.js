@@ -23,6 +23,7 @@ let score = 0;
 let highScore = Number(localStorage.getItem("flappyBirdHighScore") || 0);
 let gameOver = false;
 let paused = false;
+let gameStarted = false;
 let lastPipeTime = 0;
 let animationFrame;
 
@@ -52,6 +53,7 @@ function resetGame() {
     score = 0;
     gameOver = false;
     paused = false;
+    gameStarted = false;
     pipes.length = 0;
     lastPipeTime = performance.now();
 }
@@ -60,6 +62,10 @@ function flap() {
     if (gameOver) {
         resetGame();
     } else if (!paused) {
+        if (!gameStarted) {
+            gameStarted = true;
+            lastPipeTime = performance.now();
+        }
         velocityY = -12;
     }
 }
@@ -72,7 +78,7 @@ function togglePause() {
 }
 
 function update(timestamp) {
-    if (!paused && !gameOver) {
+    if (!paused && !gameOver && gameStarted) {
         velocityY += gravity;
         bird.y += velocityY;
         bird.y = Math.max(bird.y, 0);
@@ -121,7 +127,11 @@ function draw() {
     drawText(gameOver ? `Game Over: ${Math.floor(score)}` : String(Math.floor(score)), 10, 35, 32);
     drawText(`Best: ${highScore}`, 10, 58, 18);
 
-    if (paused) {
+    if (!gameStarted) {
+        context.fillStyle = "rgba(0, 0, 0, 0.4)";
+        context.fillRect(0, 0, width, height);
+        drawText("Tap to start", 105, 300, 32, true);
+    } else if (paused) {
         context.fillStyle = "rgba(0, 0, 0, 0.6)";
         context.fillRect(0, 0, width, height);
         drawText("Paused", 125, 285, 32, true);
